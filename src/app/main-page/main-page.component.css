@@ -1,0 +1,12 @@
+.matrix-table tr {
+    height:20px;
+    padding: 0px;
+}
+
+.matrix-table td {
+    padding: 0px !important;
+}
+
+.matrix-table td > button {
+    padding: 0px 6px;
+}

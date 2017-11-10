@@ -1,0 +1,23 @@
+<div>
+  <h2>Матрица [{{matrixN}} : {{matrixM}}]</h2>
+  <div>
+      <table class="table table-condensed matrix-table">
+          <tr *ngFor="let row of matrix; let i = index">
+              <td *ngFor="let cell of row; let j = index">
+                  <button (click)="switchCell(i, j)" class="btn btn-small" [style.background]="cell.color">
+                    {{cell.Value ? 1 : 0}}
+                  </button>
+              </td>
+          </tr>
+      </table>
+  </div>
+  <div>
+    <button (click)="findDomains()" class="btn btn-success">Посчитать домены</button>
+    <button (click)="back()" class="btn">Назад</button>
+  </div>
+  <div style="margin-top:10px">
+      <label>Количество доменов: {{domainsCount}}</label>
+      <div></div>
+      <label>Время, затраченное на расчёт матрицы (мс): {{executionTime}}</label>
+  </div>
+</div>
