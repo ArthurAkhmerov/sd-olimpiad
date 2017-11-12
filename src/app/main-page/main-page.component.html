@@ -12,12 +12,31 @@
       </table>
   </div>
   <div>
-    <button (click)="findDomains()" class="btn btn-success">Посчитать домены</button>
+    <button (click)="findDomains()" class="btn btn-success">Посчитать домены (задача #1)</button>
     <button (click)="back()" class="btn">Назад</button>
   </div>
   <div style="margin-top:10px">
       <label>Количество доменов: {{domainsCount}}</label>
       <div></div>
       <label>Время, затраченное на расчёт матрицы (мс): {{executionTime}}</label>
+  </div>
+  <div style="margin-top:10px">
+      <code *ngFor="let domain of domains; let i = index; let lastDomain = last">
+        {{'{'}}
+        <ng-container *ngFor="let row of domain; let r = index; let last = last">
+            <ng-container *ngIf="!last">
+                    ({{row}}),
+            </ng-container>
+            <ng-container *ngIf="last">
+                    ({{row}})
+            </ng-container>
+        </ng-container>
+        <ng-container *ngIf="!lastDomain">
+            {{'}'}},
+        </ng-container>
+        <ng-container *ngIf="lastDomain">
+            {{'}'}}
+        </ng-container>
+      </code>
   </div>
 </div>

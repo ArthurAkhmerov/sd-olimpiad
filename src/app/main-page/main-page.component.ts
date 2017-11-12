@@ -14,6 +14,7 @@ export class MainPageComponent implements OnInit {
   matrix: Cell[][];
   domainsCount: number;
   executionTime: number;
+  domains: number[][][];
 
   constructor(
     private domainsService: DomainsService,
@@ -23,6 +24,7 @@ export class MainPageComponent implements OnInit {
     this.matrixN = +this.route.snapshot.params['N'];
     this.matrixM = +this.route.snapshot.params['M'];
     this.matrix = [];
+    this.domains = [];
     this.domainsCount = 0;
     this.executionTime = 0;
     for(var i = 0; i < this.matrixN; i++){
@@ -35,6 +37,10 @@ export class MainPageComponent implements OnInit {
 
   switchCell(i: number, j: number) {
     this.matrix[i][j].switch();
+    this.domainsService.matrix = this.matrix;    
+    this.domainsService.recalculateDomains(i, j);
+    this.domains = this.domainsService.Domains;
+    this.domainsCount = this.domains.length;
   }
 
   findDomains() {
@@ -44,10 +50,11 @@ export class MainPageComponent implements OnInit {
       }
     }
     var start = new Date().getTime();
-    this.domainsCount = this.domainsService.findDomains(this.matrix);
+    this.domainsService.matrix = this.matrix;
+    this.domains = this.domainsService.findDomains();
+    this.domainsCount = this.domains.length;
     var end = new Date().getTime();
     this.executionTime = end - start;
-    
   }
 
   back() {

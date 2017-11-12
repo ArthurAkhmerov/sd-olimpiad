@@ -21,7 +21,8 @@ describe('DomainsServiceService', () => {
       [0, 0, 0],
       [0, 0, 0],
     ];
-    let domainsCount = service.findDomains(mapMatrix(matrix));
+    service.matrix = mapMatrix(matrix);
+    let domainsCount = service.countDomains();
 
     expect(domainsCount).toBe(1);
   }));
@@ -32,7 +33,8 @@ describe('DomainsServiceService', () => {
       [0, 0, 0],
       [0, 1, 1],
     ];
-    let domainsCount = service.findDomains(mapMatrix(matrix));
+    service.matrix = mapMatrix(matrix);
+    let domainsCount = service.countDomains();
 
     expect(domainsCount).toBe(2);
   }));
@@ -44,20 +46,22 @@ describe('DomainsServiceService', () => {
       [0, 1, 1, 0, 1, 0],
       [0, 0, 0, 1, 0, 0],
     ];
-    let domainsCount = service.findDomains(mapMatrix(matrix));
+    service.matrix = mapMatrix(matrix);
+    let domainsCount = service.countDomains();
 
     expect(domainsCount).toBe(5);
   }));
 
   it('should find a domain', inject([DomainsService], (service: DomainsService) => {
-    let domainsCount = service.findDomains(mapMatrix([[1]]));
+    service.matrix = mapMatrix([[1]]);
+    let domainsCount = service.countDomains();
 
     expect(domainsCount).toBe(1);
   }));
 
-
   it('should find no domains', inject([DomainsService], (service: DomainsService) => {
-    let domainsCount = service.findDomains(mapMatrix([[0]]));
+    service.matrix = mapMatrix([[0]]);
+    let domainsCount = service.countDomains();
     
     expect(domainsCount).toBe(0);
   }));
